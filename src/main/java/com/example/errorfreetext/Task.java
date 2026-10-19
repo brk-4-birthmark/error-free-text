@@ -31,6 +31,9 @@ public class Task {
         this.status = TaskStatus.NEW;
     }
 
+    @Column(nullable = false)
+    private String language;
+
     public UUID getId() { return id; }
     public void setId(UUID id) { this.id = id; }
 
@@ -48,4 +51,8 @@ public class Task {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public String getLanguage() { return language; }
+    public void setLanguage(String language) { this.language = language; }
+
 }

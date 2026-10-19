@@ -27,7 +27,7 @@ public class TaskScheduler {
 
                 System.out.println(">>> Начинаю обработку задачи: " + task.getId());
 
-                String corrected = yandexClient.correctText(task.getOriginalText());
+                String corrected = yandexClient.correctText(task.getOriginalText(), task.getLanguage());
 
                 task.setCorrectedText(corrected);
                 task.setStatus(TaskStatus.DONE);

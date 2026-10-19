@@ -20,6 +20,11 @@ public class TaskController {
     @PostMapping
     public ResponseEntity<?> createTask(@RequestBody Map<String, String> request) {
         String text = request.get("text");
+        String lang = request.get("lang");
+
+        if (lang == null || (!lang.equalsIgnoreCase("RU") && !lang.equalsIgnoreCase("EN"))) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Язык должен быть RU или EN"));
+        }
 
         if (text == null || text.trim().length() < 3) {
             return ResponseEntity.badRequest().body(Map.of("error", "Текст должен содержать минимум 3 символа"));
@@ -31,6 +36,7 @@ public class TaskController {
 
         Task task = new Task();
         task.setOriginalText(text);
+        task.setLanguage(lang.toUpperCase());
         Task savedTask = taskRepository.save(task);
 
         return ResponseEntity.ok(Map.of("id", savedTask.getId()));
